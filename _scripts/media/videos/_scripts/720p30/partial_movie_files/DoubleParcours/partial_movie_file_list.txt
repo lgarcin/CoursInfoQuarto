@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/DoubleParcours/2016333726_2355880207_223132457.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/DoubleParcours/543634251_1839128356_1723582614.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/DoubleParcours/543634251_3429988797_752679977.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/DoubleParcours/543634251_3161829222_4126671611.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/DoubleParcours/543634251_1465653913_2071817897.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/DoubleParcours/543634251_1754310298_1575778307.mp4'

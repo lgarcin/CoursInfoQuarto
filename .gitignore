@@ -1,0 +1,38 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+.jupyter/
+
+# UV
+uv.lock
+
+/.quarto/
+**/*.quarto_ipynb
+
+_freeze/
+_site/

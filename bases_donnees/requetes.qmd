@@ -1,0 +1,144 @@
+---
+jupytext:
+  cell_metadata_filter: -all
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+# Requêtes
+
+Pour retrouver des informations dans une base de données, on effectue ce qu'on appelle des **requêtes** décrites dans un langage approprié. Le langage que nous utiliserons est le langage **SQL** (Structured Query Language). Une requête permet de renvoyer une nouvelle table à partir de tables stockées dans la base de données.
+
+## Projection
+
+Pour sélectionner les colonnes d'une table, on utilise la requête `SELECT`. La syntaxe générale est la suivante :
+
+```sql
+SELECT _colonnes_ FROM _table_
+```
+
+La commande suivante permet de sélectionner la colonne `titre` de la table `films`.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT titre FROM films
+```
+
+On peut sélectionner plusieurs colonnes d'une table.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT titre, duree FROM films
+```
+
+
+## Sélection
+
+Pour sélectionner les enregistrements d'une table dont les attributs vérifient une certaine condition on utilise la requête `SELECT` assortie d'une clause `WHERE`.
+
+La syntaxe générale est la suivante :
+
+```sql
+SELECT _colonnes_ FROM _table_ WHERE _condition_
+```
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films WHERE annee < 1980
+```
+
+:::{.callout-note}
+L'astérique `*` permet de sélectionner toutes les colonnes d'une table.
+:::
+
+On dispose d'opérateurs logiques pour construire des conditions plus complexes.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films WHERE annee >= 1975 AND annee < 1990
+```
+
+La condition peut porter sur plusieurs colonnes.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films WHERE annee > 1980 OR duree <= 120
+```
+
+On peut également combiner les requêtes de sélection et de projection (sélection de lignes **et** de colonnes).
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT titre, annee FROM films WHERE annee >= 1990
+```
+
+## Renommage
+
+On peut renommer les colonnes et les tables à l'aide du mot-clé `AS`.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT nom AS name, pays AS country FROM realisateurs
+```
+
+## Mots-clés divers
+
+Le mot clé `LIMIT` que nous avons utilisé depuis le début de ce chapitre pour des raisons cosmétiques permet de limiter le nombre d'enregistrements renvoyés par une requête. La requête suivante renvoie les 10 premiers enregistrements de la table `films`.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films LIMIT 10
+```
+
+___
+
+Dans le même ordre d'idée, le mot-clé `OFFSET` permet de retourner les enregistrements d'une requête à partir d'un certain rang. La requête suivante permet d'ignorer les 3 premiers enregistrements de la table `films` et de renvoyer les 5 suivants.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films LIMIT 5 OFFSET 3
+```
+
+___
+
+Une clause `ORDER BY` permet d'ordonner les résultats d'une requête. Si le type utilisé dans cette clause est textuel, les enregistrements sont ordonnées par l'ordre lexicographique.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films ORDER BY titre
+```
+
+Par défaut les enregistrements sont renvoyés par ordre croissant. On peut utiliser les mots clés `ASC` (ascendant) et `DESC` (descendant) si on veut spécifier l'ordre.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films ORDER BY titre ASC
+```
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films ORDER BY titre DESC
+```
+
+On peut utiliser plusieurs critères de tris successifs. Dans la requête suivante, les résultats sont triés par année croissante puis par titre décroissant.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT * FROM films ORDER BY annee, titre DESC
+```
+
+___
+
+Le mot clé `DISTINCT` permet de supprimer les doublons dans le résultat d'une requête.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT nom, pays FROM realisateurs
+```
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT DISTINCT pays FROM realisateurs
+```
+
+___
+
+On peut combiner tous les mots clés précédents pour effectuer des requêtes complexes.
+
+```{.sql db_name=../_databases/dummy.db}
+SELECT titre, annee FROM films
+WHERE annee > 1980 OR duree > 150
+ORDER BY duree DESC
+LIMIT 10
+``` 

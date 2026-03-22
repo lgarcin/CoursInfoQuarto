@@ -1,0 +1,285 @@
+# Algorithmes de recherche
+
+En informatique, un tableau est une structure de données représentant une séquence finie d'éléments auxquels on peut accéder par leur position dans la séquence. On utilisera des listes Python pour représenter ces tableaux. On peut également remarquer qu'une chaîne de caractères est un tableau de caractères.
+
+On s'intéresse dans ce paragraphe à divers algorithmes permettant de traiter des tableaux ou de retrouver de l'information dans ceux-ci.
+
+## Recherche d'un élément
+
+On cherche à savoir si une valeur donnée fait bien partie des éléments d'un tableau. On parcourt tout simplement ce tableau et on renvoie `True` dès qu'on trouve cette valeur dans le tableau. Si la valeur n'a pas été trouvée à la fin du parcours, on renvoie `False`.
+
+```{python}
+def appartient(valeur, tableau):
+    for element in tableau:
+        if element == valeur:
+            return True
+    return False
+```
+
+```{python}
+appartient('Alice', ['Alice', 'Bob', 'Charles-Antoine'])
+```
+
+```{python}
+appartient('Dédé', ['Alice', 'Bob', 'Charles-Antoine'])
+```
+
+:::{.callout-note}
+Le langage Python dispose de l'opérateur `in` pour déterminer si une valeur appartient à une liste.
+:::
+
+```{python}
+'Alice' in ['Alice', 'Bob', 'Charles-Antoine']
+```
+
+```{python}
+'Dédé' in ['Alice', 'Bob', 'Charles-Antoine']
+```
+
+On peut modifier l'algorithme precédent afin qu'il renvoie l'indice du tableau où on a trouvé la valeur recherché et `None` si la valeur n'a pas été trouvée.
+
+```{python}
+def indice(valeur, tableau):
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            return i
+    return None
+```
+
+```{python}
+indice(2, [5, 4, 1, 2, 3])
+```
+
+```{python}
+print(indice(6, [5, 4, 1, 2, 3]))
+```
+
+:::{.callout-note}
+La méthode `index` de la classe `list` permet de déterminer l'indice d'une valeur dans une liste.
+:::
+
+```{python}
+[5, 4, 1, 2, 3].index(2)
+```
+
+```{python}
+#| error: true
+[5, 4, 1, 2, 3].index(6)
+```
+
+## Recherche du maximum
+
+```{python}
+def maximum(tableau):
+    m = None
+    for element in tableau:
+        if m == None or m < element:
+            m = element
+    return m
+```
+
+```{python}
+maximum([4, 5, 8, 1, 3])
+```
+
+```{python}
+print(maximum([]))
+```
+
+```{python}
+def argmax(tableau):
+    index = None
+    for i in range(len(tableau)):
+        if index == None or tableau[index] < tableau[i]:
+            index = i
+    return index
+```
+
+```{python}
+argmax([4, 5, 8, 1, 3])
+```
+
+```{python}
+print(argmax([]))
+```
+
+```{python}
+def second_maximum(tableau):
+    m1 = None
+    m2 = None
+    for element in tableau:
+        if m1 == None or m1 < element:
+            m2 = m1
+            m1 = element
+        elif m2 == None or m2 < element:
+            m2 = element
+    return m2
+```
+
+```{python}
+second_maximum([4, 5, 8, 1, 3])
+```
+
+```{python}
+print(second_maximum([]))
+```
+
+```{python}
+print(second_maximum([2]))
+```
+
+## Comptage des éléments d'un tableau
+
+```{python}
+def comptage(tableau):
+    d = {}
+    for element in tableau:
+        if element in d:
+            d[element] += 1
+        else:
+            d[element] = 1
+    return d
+```
+
+```{python}
+comptage(['Alice', 'Bob', 'Alice', 'Charles', 'Charles', 'Alice'])
+```
+
+## Recherche d'un motif dans une chaîne
+
+```{python}
+def recherche_motif(motif, chaine):
+    n = len(chaine)
+    m = len(motif)
+    for ind in range(n-m+1):
+        nb = 0
+        while nb < m and chaine[ind+nb] == motif[nb]:
+            nb +=1
+        if nb == m:
+            return True
+    return False
+```
+
+```{python}
+#| echo: false
+%run _scripts/recherche_motif.py
+```
+
+```{python}
+#| include: false
+from manim import tempconfig
+
+with tempconfig({'quality': 'low_quality', 'output_file': 'recherche_chaine_succes', 'verbosity': 'ERROR'}):
+    recherche_chaine_succes = RechercheMotif("pitapipapa", "pipa")
+    recherche_chaine_succes.render()
+with tempconfig({'quality': 'low_quality', 'output_file': 'recherche_chaine_echec', 'verbosity': 'ERROR'}):
+    recherche_chaine_echec = RechercheMotif("pitapipapa", "tapa")
+    recherche_chaine_echec.render()
+```
+
+
+```{python}
+recherche_motif("pipa", "pitapipapa")
+```
+
+```{python}
+#| echo: false
+from IPython.display import Video
+
+Video(recherche_chaine_succes.renderer.file_writer.movie_file_path,embed=True)
+```
+
+```{python}
+recherche_motif("tapa", "patapipapa")
+```
+
+```{python}
+#| echo: false
+from IPython.display import Video
+
+Video(recherche_chaine_echec.renderer.file_writer.movie_file_path,embed=True)
+```
+
+## Recherche des deux valeurs les plus proches d'un tableau
+
+```{python}
+def plus_proches_valeurs(tableau):
+    valeurs = None
+    for i in range(len(tableau)):
+        for j in range(i+1, len(tableau)):
+            if valeurs == None or abs(tableau[i] - tableau[j]) < abs(valeurs[0] - valeurs[1]):
+                valeurs = tableau[i], tableau[j]
+    return valeurs
+```
+
+```{python}
+plus_proches_valeurs([7, 4, 9, 13])
+```
+
+```{python}
+print(plus_proches_valeurs([]))
+```
+
+```{python}
+print(plus_proches_valeurs([7]))
+```
+
+## Tri à bulles
+
+Le **tri à bulles** fait partie des algorithmes de tri classiques. Trier un tableau consiste à ordonner ses éléments du plus petit au plus grand. On suppose donc que les éléments du tableau sont à valeurs dans un ensemble muni d'une relation d'ordre total.
+
+Le tri à bulles consiste à déplacer les éléments du plus grand au plus petit vers la fin du tableau comme des bulles d'air dans un liquide. Plus précisément :
+
+* on parcourt le tableau en comparant les couples d'éléments consécutifs ;
+* si deux éléments consécutifs ne sont pas dans le bon ordre, on les échange ;
+* à la fin de ce premiers parcours du tableau, on peut garantir que le plus grand élément du tableau est en dernière position ;
+* on répète alors ce qui précède sur le tableau privé de son dernier élément et ainsi de suite jusqu'à tri complet du tableau.
+
+```{python}
+#| echo: false
+%run _scripts/tri_bulles.py
+```
+
+```{python}
+#| include: false
+from manim import tempconfig
+
+with tempconfig(
+    {"quality": "low_quality", "output_file": "tri_bulles", "verbosity": "ERROR"}
+):
+    tri_bulles_movie = TriBulles([5, 1, 7, 9, 8, 2, 4, 6, 3, 0])
+    tri_bulles_movie.render()
+```
+
+```{python}
+# | echo: false
+from IPython.display import Video
+
+Video(tri_bulles_movie.renderer.file_writer.movie_file_path, embed=True)
+```
+
+```{python}
+def tri_bulles(tableau):
+    for i in reversed(range(len(tableau))):
+        for j in range(i):
+            if tableau[j+1] < tableau[j]:
+                tableau[j], tableau[j+1] = tableau[j+1], tableau[j]
+```
+
+```{python}
+t = [4, 2, 5, 3, 8, 7, 6, 1]
+tri_bulles(t)
+t
+```
+
+```{python}
+t = []
+tri_bulles(t)
+t
+```
+
+```{python}
+t = [4]
+tri_bulles(t)
+t
+```

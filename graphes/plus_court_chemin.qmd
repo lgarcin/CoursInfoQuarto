@@ -1,0 +1,359 @@
+# Recherche d'un plus court chemin
+
+## Graphe pondéré
+
+```{python}
+# | echo: false
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+from sympy import Matrix
+import warnings
+
+warnings.filterwarnings("ignore")
+```
+
+:::{#def-graphe-etiquete}
+# Graphe étiqueté
+
+Un graphe (orienté ou non) est dit **étiqueté** si l'on a affecté un attribut (nombre, chaîne de caractère, ...) à chacune de ses arêtes ou chacun de ses arcs.
+
+De manière plus formelle, un graphe étiqueté est un triplet $(S,A,f)$ où $(S,A)$ est un graphe et $f$ une application de $A$ dans un ensemble $E$.
+:::
+
+Par exemple, un tel graphe pourrait servir à décrire le type de lien existant entre les différents membres d'un réseau social.
+
+```{python}
+# | echo: false
+edges = [
+    ("Alice", "Bertrand"),
+    ("Bertrand", "Claire"),
+    ("Bertrand", "Denis"),
+    ("Claire", "Estelle"),
+    ("Alice", "François"),
+    ("Claire", "François"),
+]
+G = nx.Graph()
+G.add_edges_from(edges)
+pos = nx.planar_layout(G)
+nx.draw(G, pos, node_size=2000, with_labels=True, font_size=10)
+nx.draw_networkx_edge_labels(
+    G,
+    pos,
+    edge_labels={
+        ("Alice", "Bertrand"): "Famille",
+        ("Bertrand", "Claire"): "Travail",
+        ("Bertrand", "Denis"): "Amitié",
+        ("Claire", "Estelle"): "Travail",
+        ("Alice", "François"): "Amitié",
+        ("Claire", "François"): "Famille",
+    },
+)
+plt.show()
+```
+
+:::{#def-graphe-pondere}
+# Graphe pondéré
+
+Un graphe **pondéré** est un graphe étiqueté par des réels positifs. On parle alors du **poids** d'une arête.
+
+De manière plus formelle, un graphe étiqueté est un triplet $(S,A,p)$ où $(S,A)$ est un graphe et $p$ une application de $A$ dans un ensemble $\dR_+$.
+:::
+
+On peut par exemple utiliser un graphe pondéré pour modéliser des distances entre des sommets.
+
+```{python}
+# | echo: false
+G = nx.Graph()
+
+G.add_edge("Paris", "Tokyo", weight=9718)
+G.add_edge("Paris", "Moscou", weight=2483)
+G.add_edge("Paris", "Londres", weight=344)
+G.add_edge("Paris", "Rome", weight=1105)
+G.add_edge("Tokyo", "Moscou", weight=7693)
+G.add_edge("Tokyo", "Londres", weight=9589)
+G.add_edge("Moscou", "Londres", weight=2500)
+G.add_edge("Londres", "Rome", weight=1415)
+
+pos = nx.circular_layout(G)
+labels = nx.get_edge_attributes(G, "weight")
+nx.draw(G, pos, with_labels=True, node_size=2000, font_size=10)
+nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+plt.show()
+```
+
+## Représentation d'un graphe pondéré
+
+On peut représenter un graphe pondéré (ou, de manière plus générale, étiqueté) de diverses manières.
+
+```{python}
+# | echo: false
+weighted_edges = [
+    ("A", "B", 10),
+    ("C", "A", 20),
+    ("C", "B", 5),
+    ("A", "D", 15),
+    ("B", "D", 30),
+    ("E", "C", 20),
+    ("D", "E", 10),
+    ("F", "C", 10),
+    ("E", "F", 5),
+]
+G = nx.Graph()
+G.add_weighted_edges_from(weighted_edges)
+labels = nx.get_edge_attributes(G, "weight")
+pos = nx.planar_layout(G)
+nx.draw(G, pos=pos, with_labels=True, font_weight="bold", font_size=20, node_size=600)
+nx.draw_networkx_edge_labels(G, pos=pos, edge_labels=labels)
+plt.show()
+```
+
+### Dictionnaire de listes de couples
+
+On peut tout d'abord utiliser un dictionnaire faisant correspondre à chaque sommet la liste des couples formés des sommets voisins et des poids des arêtes correspondantes.
+
+```{python}
+# | echo: false
+graphe_liste_tuples = {
+    s: [(k, G[s][k]["weight"]) for k in v] for (s, v) in G.adjacency()
+}
+graphe_liste_tuples
+```
+
+### Dictionnaire de dictionnaires
+
+De manière similaire, on peut utiliser une dictionnaire faisant correspondre à chaque sommet un dictionnaire associant à chacun de ses voisins le poids de l'arête correspondante.
+
+```{python}
+# | echo: false
+graphe_dictionnaire = {s: {k: G[s][k]["weight"] for k in v} for (s, v) in G.adjacency()}
+graphe_dictionnaire
+```
+
+### Matrice
+
+Enfin, quitte à numéroter les sommets, on peut utiliser une matrice dont le coefficient $(i,j)$ est le poids de l'arête $\{i,j\}$ si elle existe et $\infty$ sinon.
+
+```{python}
+# | echo: false
+Matrix(nx.to_numpy_array(G, dtype=float, nonedge=np.inf))
+```
+
+## Algorithme de Dijsktra
+
+```{python}
+# | echo: false
+%run ../_scripts/dijkstra.py
+```
+
+L'objectif de l'algorithme de Dijkstra est de déterminer un **chemin de poids minimal** entre deux sommets d'un graphe pondéré, le poids d'un chemin étant égal à la somme des poids des arêtes qui le composent. Bien souvent, le poids d'une arête représente une distance entre deux sommets : on parle alors de **plus court chemin**.
+
+Plus précisément, en fixant un sommet de départ $s_0$ d'un graphe pondéré $(S,A,p)$, l'algorithme de Dijkstra calcule les distances minimales $d[s]$ du sommet de départ $s_0$ à chacun des sommets $s$ du graphe.
+
+:::{#algo-dijkstra title="Algorithme de Dijkstra"}
+
+- Initialisation :
+  - On initialise les distances : $d[s]=\infty$ pour tout $s\in S\setminus\{s_0\}$ et $d[s_0]=0$
+  - On initialise la liste des sommets à traiter : $L\gets S$
+- Tant que $L\neq\emptyset$
+  - Trouver le sommet $s_m$ de $L$ telle que $d[s_m]$ est minimale
+  - Pour chaque voisin $v$ de $s_m$ dans $L$, $d[v]=\min(d[v],d[s_m]+p(s_m,v))$
+  - Retirer $s_m$ de $L$
+:::
+
+```{python}
+# | echo: false
+Dijkstra(G).get_dijkstra_animation("A")
+```
+
+```{python}
+from math import inf
+
+
+def dijkstra(dod, deb):
+    dist = {s: inf for s in dod}
+    dist[deb] = 0
+    sommets_non_traites = {s for s in dod}
+    while len(sommets_non_traites) != 0:
+        min_dist = inf
+        for s in sommets_non_traites:
+            if dist[s] < min_dist:
+                min_dist_sommet = s
+                min_dist = dist[s]
+        voisins = dod[min_dist_sommet]
+        for s in voisins:
+            if s in sommets_non_traites:
+                dist[s] = min(dist[s], min_dist + voisins[s])
+        sommets_non_traites.remove(min_dist_sommet)
+    return dist
+```
+
+```{python}
+graphe_dictionnaire
+```
+
+```{python}
+dijkstra(graphe_dictionnaire, "A")
+```
+
+L'algorithme précédent fournit seulement les distances minimales d'un sommet de départ aux autres sommets du graphe. En modifiant légèrement cet algorithme, on peut également récupérer les chemins correspondants en affectant à chaque sommet le sommet qui le précède dans le chemin minimal.
+
+```{python}
+def dijkstra_predecesseurs(dod, deb):
+    predecesseurs = {s: (inf, None) for s in dod}
+    predecesseurs[deb] = (0, None)
+    sommets_non_traites = {s for s in dod}
+    while len(sommets_non_traites) != 0:
+        min_dist = inf
+        for s in sommets_non_traites:
+            dist, _ = predecesseurs[s]
+            if dist < min_dist:
+                min_dist_sommet = s
+                min_dist = dist
+        voisins = dod[min_dist_sommet]
+        for s in voisins:
+            if s in sommets_non_traites:
+                d = min_dist + voisins[s]
+                dist, _ = predecesseurs[s]
+                if d < dist:
+                    predecesseurs[s] = (d, min_dist_sommet)
+        sommets_non_traites.remove(min_dist_sommet)
+    return predecesseurs
+```
+
+```{python}
+dijkstra_predecesseurs(graphe_dictionnaire, "A")
+```
+
+:::{#exr-chemins-predecesseurs}
+Ecrire une fonction prenant en argument un dictionnaire renvoyé par la fonction `dijkstra_predecesseurs` et renvoyant un dictionnaire associant à chaque sommet le chemin minimal (sous forme d'une liste de sommets) qui le relie au sommet initial.
+:::
+
+Si on le souhaite, on peut également récupérer pour chaque sommet la totalité du chemin minimal plutôt que son prédécesseur dans le chemin minimal.
+
+```{python}
+def dijkstra_chemins(dod, deb):
+    chemins = {s: (inf, None) for s in dod}
+    chemins[deb] = (0, [])
+    sommets_non_traites = {s for s in dod}
+    while len(sommets_non_traites) != 0:
+        min_dist = inf
+        for s in sommets_non_traites:
+            dist, _ = chemins[s]
+            if dist < min_dist:
+                min_dist_sommet = s
+                min_dist = dist
+        voisins = dod[min_dist_sommet]
+        for s in voisins:
+            if s in sommets_non_traites:
+                d = min_dist + voisins[s]
+                dist, _ = chemins[s]
+                if d < dist:
+                    _, chemin = chemins[min_dist_sommet]
+                    chemins[s] = (d, chemin + [min_dist_sommet])
+        sommets_non_traites.remove(min_dist_sommet)
+    return chemins
+```
+
+```{python}
+dijkstra_chemins(graphe_dictionnaire, "A")
+```
+
+Les algorithmes précédents fonctionnent toujours avec des graphes **orientés**.
+
+```{python}
+# | echo: false
+G = nx.DiGraph()
+G.add_weighted_edges_from(weighted_edges)
+```
+
+```{python}
+# | echo: false
+Dijkstra(G).get_dijkstra_animation("A")
+```
+
+```{python}
+# | echo: false
+graphe_dictionnaire = {s: {k: G[s][k]['weight'] for k in v} for (s, v) in G.adjacency()}
+```
+
+```{python}
+graphe_dictionnaire
+```
+
+```{python}
+dijkstra_chemins(graphe_dictionnaire, "A")
+```
+
+
+## Files de priorité
+
+L'implémentation précédente de l'algorithme de Dijkstra nécessite la recherche du sommet de distance minimal, qui est de complexité linéaire.
+
+```{python}
+# | eval: false
+        ...
+        for s in sommets_non_traites:
+            dist, _ = chemins[s]
+            if dist < min_dist:
+                min_dist_sommet = s
+                min_dist = dist
+        ...
+```
+
+Pour appliquer de manière efficace l'algorithme de Dijkstra à des graphes possédant un grand nombre de sommets, il est nécessaire d'utiliser une structure de données adaptée.
+
+Contrairement à une [file classique](parcours.qmd#files), une **file de priorité** permet :
+
+- d'enfiler un élément ;
+- et de défiler un élément de **clé** minimale.
+
+Dans le cas de l'algorithme de Dijkstra, la clé associée à chaque sommet est sa distance au sommet initial.
+
+Généralement, les files de priorité sont implémentées de sorte que les opérations d'enfilement et de défilement de l'élément de clé minimale soit de complexité logarithmique.
+
+:::{.callout-note}
+Si on voulait implémenter une file de priorité via une liste, l'enfilement serait de complexité constante mais le défilement de l'élément de clé minimale serait de complexité linéaire (recherche du plus petit élément d'une liste).
+:::
+
+Le module `heapq` en Python permer de manipuler des listes de priorité. Les fonctions `heappush`et `heappop` permettent respectivement d'enfiler et de défiler un élément. On peut alors proposer l'implémentation suivante de l'algorithme de Dijkstra.
+
+```{python}
+from heapq import heappush, heappop
+from math import inf
+
+
+def dijkstra_file_priorite(dod, deb):
+    dist = {s: inf for s in dod}
+    dist[deb] = 0
+    tas = []
+    heappush(tas, (0, deb))
+
+    while tas:
+        min_dist, min_dist_sommet = heappop(tas)
+
+        if min_dist > dist[min_dist_sommet]:
+            continue
+
+        voisins = dod[min_dist_sommet]
+        for s in voisins:
+            d = min_dist + voisins[s]
+            if d < dist[s]:
+                dist[s] = d
+                heappush(tas, (d, s))
+
+    return dist
+```
+
+
+```{python}
+dijkstra_file_priorite(graphe_dictionnaire, "A")
+```
+
+
+:::{#exr-file-priorite-variantes}
+Modifier la fonction `dijkstra_file_priorite` de manière à ce qu'elle renvoie un dictionnaire associant à chaque sommet son prédécesseur ou le chemin minimal le reliant au sommet initial.
+:::
+
+
+<!-- TODO Comparer avec l'algorithme A* -->

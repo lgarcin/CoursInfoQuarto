@@ -1,0 +1,10 @@
+# This file is used internally by FFMPEG.
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/1185818338_3322400424_2969082208.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_3201849554_4184211253.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_1425575188_796762171.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_3201849554_2628225678.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_2941579059_3643156740.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_346522072_2407564900.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_3201849554_1133354321.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_3672508424_3000547440.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/media/videos/CoursInfoQuarto/480p15/partial_movie_files/FileIllustration/624642324_1839128356_1009472810.mp4'

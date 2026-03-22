@@ -1,0 +1,58 @@
+project:
+  type: website
+
+website:
+  title: "Cours d'informatique pour tous en CPGE"
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - text: "Introduction"
+        href: index.qmd
+      - section: "Premier semestre"
+        contents:
+          - recherche.qmd
+          - dichotomie.qmd
+          - recursivite.qmd
+          - gloutons.qmd
+          - images.qmd
+          - tris.qmd
+      - section: "Deuxième semestre"
+        contents:
+          - section: "Graphes"
+            contents:
+              - graphes/intro.qmd
+              - graphes/graphe.qmd
+              - graphes/graphe_oriente.qmd
+              - graphes/implementation.qmd
+              - graphes/parcours.qmd
+              - graphes/plus_court_chemin.qmd
+      - section: "Troisième semestre"
+        contents:
+          - section: "Bases de données"
+            contents:
+              - bases_donnees/intro.qmd
+              - bases_donnees/tables.qmd
+              - bases_donnees/requetes.qmd
+              - bases_donnees/operateurs_ensemblistes.qmd
+              - bases_donnees/entite_association.qmd
+              - bases_donnees/jointures.qmd
+              - bases_donnees/agregation.qmd
+
+lang: fr
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    include-in-header: _macros.html
+    mermaid:
+      theme: default
+
+execute:
+  enabled: true
+  freeze: auto
+
+filters: 
+  - filters/sql_filter.py

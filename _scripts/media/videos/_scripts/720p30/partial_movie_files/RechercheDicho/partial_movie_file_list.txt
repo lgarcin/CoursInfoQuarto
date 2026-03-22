@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/RechercheDicho/2016333726_1885885351_223132457.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/RechercheDicho/543634251_4194217676_2185199528.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/RechercheDicho/543634251_3201849554_400419675.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/RechercheDicho/543634251_3400950727_1390364038.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/RechercheDicho/543634251_3201849554_1465242525.mp4'
+file 'file:E:/Documents/GitHub/CoursInfoQuarto/_scripts/media/videos/_scripts/720p30/partial_movie_files/RechercheDicho/543634251_1138342221_3866528712.mp4'

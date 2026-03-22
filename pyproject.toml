@@ -1,0 +1,22 @@
+[project]
+name = "coursinfo-quarto"
+version = "0.1.0"
+description = "Cours d'informatique pour tous en CPGE"
+requires-python = ">=3.12"
+
+dependencies = [
+    "jupyter",
+    "jupyterlab",
+    "manim",
+    "networkx",
+    "matplotlib",
+    "numpy",
+    "bokeh",
+    "pandas",
+    "scipy",
+    "pillow",
+    "panflute",
+]
+
+[project.optional-dependencies]
+dev = ["ruff", "black", "mypy"]
