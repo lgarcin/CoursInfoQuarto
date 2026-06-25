@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>agregation – Cours d'informatique pour tous en CPGE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0a7cb34cac91f1e379683137705fbdd2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+<script>
+    window.MathJax = {
+        tex: {
+            macros: {
+                dR: "\\mathbb{R}",
+            }
+        }
+    };
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Troisième semestre</li><li class="breadcrumb-item"><a href="../bases_donnees/intro.html">Bases de données</a></li><li class="breadcrumb-item"><a href="../bases_donnees/agregation.html">Agrégation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Cours d’informatique pour tous en CPGE</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Recherche"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Premier semestre</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../recherche.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithmes de recherche</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../dichotomie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dichotomie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../recursivite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Récursivité</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gloutons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithmes gloutons</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../images.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Images</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tris</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Deuxième semestre</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Graphes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../graphes/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction aux graphes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../graphes/graphe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphe non orienté</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../graphes/graphe_oriente.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphe orienté</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../graphes/implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implémentation d’un graphe</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../graphes/parcours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parcours d’un graphe et applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../graphes/plus_court_chemin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Recherche d’un plus court chemin</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Troisième semestre</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bases de données</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bases_donnees/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction aux bases de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bases_donnees/tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bases_donnees/requetes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Requêtes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bases_donnees/operateurs_ensemblistes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Opérateurs ensemblistes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bases_donnees/entite_association.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modèle entité-association</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bases_donnees/jointures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Jointures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bases_donnees/agregation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Agrégation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Intelligence artificielle et étude des jeux</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ia/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intelligence artificielle et étude des jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ia/voisins.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithme des k-voisins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ia/moyennes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithme des k-moyennes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ia/jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Etude des jeux</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#agrégation" id="toc-agrégation" class="nav-link active" data-scroll-target="#agrégation">Agrégation</a>
+  <ul class="collapse">
+  <li><a href="#fonctions-dagrégation" id="toc-fonctions-dagrégation" class="nav-link" data-scroll-target="#fonctions-dagrégation">Fonctions d’agrégation</a>
+  <ul class="collapse">
+  <li><a href="#minimum-maximum" id="toc-minimum-maximum" class="nav-link" data-scroll-target="#minimum-maximum">Minimum, maximum</a></li>
+  <li><a href="#somme-moyenne" id="toc-somme-moyenne" class="nav-link" data-scroll-target="#somme-moyenne">Somme, moyenne</a></li>
+  <li><a href="#comptage" id="toc-comptage" class="nav-link" data-scroll-target="#comptage">Comptage</a></li>
+  </ul></li>
+  <li><a href="#agrégation-sur-des-regroupements" id="toc-agrégation-sur-des-regroupements" class="nav-link" data-scroll-target="#agrégation-sur-des-regroupements">Agrégation sur des regroupements</a></li>
+  <li><a href="#filtrage-des-agrégats" id="toc-filtrage-des-agrégats" class="nav-link" data-scroll-target="#filtrage-des-agrégats">Filtrage des agrégats</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Troisième semestre</li><li class="breadcrumb-item"><a href="../bases_donnees/intro.html">Bases de données</a></li><li class="breadcrumb-item"><a href="../bases_donnees/agregation.html">Agrégation</a></li></ol></nav></header>
+
+
+
+
+<section id="agrégation" class="level1">
+<h1>Agrégation</h1>
+<p>Les fonctions d’agrégation permettent d’effectuer des opérations sur un ensemble de lignes d’une même table :</p>
+<ul>
+<li>déterminer la somme des éléments d’une colonne ;</li>
+<li>déterminer le minimum d’une colonne ;</li>
+<li>etc…</li>
+</ul>
+<section id="fonctions-dagrégation" class="level2">
+<h2 class="anchored" data-anchor-id="fonctions-dagrégation">Fonctions d’agrégation</h2>
+<section id="minimum-maximum" class="level3">
+<h3 class="anchored" data-anchor-id="minimum-maximum">Minimum, maximum</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MIN</span>(annee) <span class="kw">FROM</span> films</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>MIN(annee)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1960</td>
+    </tr>
+  </tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MAX</span>(duree) <span class="kw">FROM</span> films</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>MAX(duree)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>217</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+<section id="somme-moyenne" class="level3">
+<h3 class="anchored" data-anchor-id="somme-moyenne">Somme, moyenne</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(duree) <span class="kw">FROM</span> films</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>SUM(duree)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2443</td>
+    </tr>
+  </tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">AVG</span>(duree) <span class="kw">FROM</span> films</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>AVG(duree)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>128.57894736842104</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+<section id="comptage" class="level3">
+<h3 class="anchored" data-anchor-id="comptage">Comptage</h3>
+<p>La fonction <code>COUNT</code> compte le nombre de lignes d’une table dans une ou plusieurs colonnes données.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> realisateurs</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>COUNT(*)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<p>Les colonnes spécifiées dans la commande <code>COUNT</code> peuvent avoir une importance s’il manque des données dans certaines colonnes (valeur <code>None</code> dans les enregistrements).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> t</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>col_a</th>
+      <th>col_b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>None</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>None</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> t</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>COUNT(*)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(col_a) <span class="kw">FROM</span> t</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>COUNT(col_a)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(col_b) <span class="kw">FROM</span> t</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>COUNT(col_b)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<p>On peut également utiliser le mot-clé <code>DISTINCT</code> pour déterminer le nombre de lignes distinctes d’une ou plusieurs colonnes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> pays <span class="kw">FROM</span> realisateurs</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>pays</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>France</td>
+    </tr>
+    <tr>
+      <td>France</td>
+    </tr>
+    <tr>
+      <td>Danemark</td>
+    </tr>
+    <tr>
+      <td>Taïwan</td>
+    </tr>
+    <tr>
+      <td>Japon</td>
+    </tr>
+    <tr>
+      <td>Russie</td>
+    </tr>
+    <tr>
+      <td>Etats-Unis</td>
+    </tr>
+    <tr>
+      <td>Etats-Unis</td>
+    </tr>
+  </tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> pays) <span class="kw">FROM</span> realisateurs</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>COUNT(DISTINCT pays)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+</section>
+<section id="agrégation-sur-des-regroupements" class="level2">
+<h2 class="anchored" data-anchor-id="agrégation-sur-des-regroupements">Agrégation sur des regroupements</h2>
+<p>Par défaut, une fonction d’agrégation est appliquée à toutes les lignes d’une table. On peut effectuer des agrégations sur des groupements de lignes à l’aide d’une clause <code>GROUP BY</code>. Plus précisément, cette clause permet d’appliquer une fonction d’agrégation sur les groupes de lignes possédant la même valeur pour un attribut donné. Ces groupements de lignes portent le nom d’agrégats.</p>
+<p>La requête suivante permet par exemple de compter le nombre de réalisateurs pour chaque pays d’origine.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> pays, <span class="fu">COUNT</span>(<span class="kw">id</span>) <span class="kw">AS</span> nb_realisateurs <span class="kw">FROM</span> realisateurs <span class="kw">GROUP</span> <span class="kw">BY</span> pays</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>pays</th>
+      <th>nb_realisateurs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Danemark</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Etats-Unis</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Japon</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Russie</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Taïwan</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>On peut aussi effectuer des groupements sur plusieurs attributs. La requête suivante permet de déterminer la note moyenne donné pour chaque couple <code>(spectateur, pays)</code>. Autrement dit, on peut obtenir la note moyenne de chaque spectateur pour tous les films d’un pays donné.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> spectateurs.nom <span class="kw">AS</span> nom_spectateur, pays <span class="kw">AS</span> pays_film, <span class="fu">AVG</span>(note) <span class="kw">AS</span> note_moyenne</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> spectateurs <span class="kw">JOIN</span> notes <span class="kw">JOIN</span> films <span class="kw">JOIN</span> realisateurs</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> notes.spectateur_id<span class="op">=</span>spectateurs.<span class="kw">id</span> <span class="kw">AND</span> notes.film_id<span class="op">=</span>films.<span class="kw">id</span> <span class="kw">AND</span> films.realisateur_id<span class="op">=</span>realisateurs.<span class="kw">id</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> spectateurs.nom, pays</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>nom_spectateur</th>
+      <th>pays_film</th>
+      <th>note_moyenne</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alain Dupont</td>
+      <td>Danemark</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Alain Dupont</td>
+      <td>Etats-Unis</td>
+      <td>4.25</td>
+    </tr>
+    <tr>
+      <td>Alain Dupont</td>
+      <td>France</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <td>Alain Dupont</td>
+      <td>Japon</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Alain Dupont</td>
+      <td>Russie</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Alain Dupont</td>
+      <td>Taïwan</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>Annie Durand</td>
+      <td>Danemark</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Annie Durand</td>
+      <td>Etats-Unis</td>
+      <td>8.666666666666666</td>
+    </tr>
+    <tr>
+      <td>Annie Durand</td>
+      <td>France</td>
+      <td>8.5</td>
+    </tr>
+    <tr>
+      <td>Annie Durand</td>
+      <td>Japon</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>Annie Durand</td>
+      <td>Russie</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>Annie Durand</td>
+      <td>Taïwan</td>
+      <td>9.5</td>
+    </tr>
+    <tr>
+      <td>Gérard Bouchard</td>
+      <td>Etats-Unis</td>
+      <td>6.666666666666667</td>
+    </tr>
+    <tr>
+      <td>Gérard Bouchard</td>
+      <td>France</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <td>Gérard Bouchard</td>
+      <td>Taïwan</td>
+      <td>4.666666666666667</td>
+    </tr>
+    <tr>
+      <td>Jean Dubois</td>
+      <td>Etats-Unis</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Jean Dubois</td>
+      <td>France</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Jean Dubois</td>
+      <td>Russie</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Jean Dubois</td>
+      <td>Taïwan</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Mireille Deschamps</td>
+      <td>Etats-Unis</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <td>Mireille Deschamps</td>
+      <td>France</td>
+      <td>5.5</td>
+    </tr>
+    <tr>
+      <td>Mireille Deschamps</td>
+      <td>Japon</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Mireille Deschamps</td>
+      <td>Russie</td>
+      <td>2.5</td>
+    </tr>
+    <tr>
+      <td>Mireille Deschamps</td>
+      <td>Taïwan</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <td>Roger Martin</td>
+      <td>Danemark</td>
+      <td>5.5</td>
+    </tr>
+    <tr>
+      <td>Roger Martin</td>
+      <td>Etats-Unis</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Roger Martin</td>
+      <td>France</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Roger Martin</td>
+      <td>Japon</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Roger Martin</td>
+      <td>Russie</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>Roger Martin</td>
+      <td>Taïwan</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <td>Valérie Petit</td>
+      <td>Danemark</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Valérie Petit</td>
+      <td>Etats-Unis</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Valérie Petit</td>
+      <td>France</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Valérie Petit</td>
+      <td>Japon</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Valérie Petit</td>
+      <td>Russie</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Valérie Petit</td>
+      <td>Taïwan</td>
+      <td>5.5</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+<section id="filtrage-des-agrégats" class="level2">
+<h2 class="anchored" data-anchor-id="filtrage-des-agrégats">Filtrage des agrégats</h2>
+<p>La clause <code>HAVING</code> permet de filtrer une requête à l’aide d’une condition portant sur le résultat d’une fonction d’agrégation.</p>
+<p>Par exemple, la requête suivante liste tous les réalisateurs dont la durée moyenne des films est strictement supérieure à 120 minutes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, <span class="fu">AVG</span>(duree) <span class="kw">AS</span> duree_moyenne</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> realisateurs <span class="kw">JOIN</span> films <span class="kw">ON</span> films.realisateur_id<span class="op">=</span>realisateurs.<span class="kw">id</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> nom</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> duree_moyenne<span class="op">&gt;</span><span class="dv">120</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>nom</th>
+      <th>duree_moyenne</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>David Lynch</td>
+      <td>132</td>
+    </tr>
+    <tr>
+      <td>Hou Hsiao-Hsien</td>
+      <td>127</td>
+    </tr>
+    <tr>
+      <td>Jean Eustache</td>
+      <td>170</td>
+    </tr>
+    <tr>
+      <td>Michael Cimino</td>
+      <td>182</td>
+    </tr>
+  </tbody>
+</table>
+<p>La clause <code>HAVING</code> semble similaire à la clause <code>WHERE</code> mais elle en diffère en ce que la clause <code>WHERE</code> filtre les lignes individuelles d’une table tandis que la clause <code>HAVING</code> filtre des agrégats ou groupements de lignes.</p>
+<p>On peut bien entendu effectuer des requêtes comportant à la fois une clause <code>WHERE</code> et une clause <code>HAVING</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, <span class="fu">AVG</span>(duree) <span class="kw">AS</span> duree_moyenne</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> realisateurs <span class="kw">JOIN</span> films <span class="kw">ON</span> films.realisateur_id<span class="op">=</span>realisateurs.<span class="kw">id</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> annee<span class="op">&lt;</span><span class="dv">2000</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> nom</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> duree_moyenne<span class="op">&gt;</span><span class="dv">120</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="dataframe table table-sm table-striped small">
+  <thead>
+    <tr>
+      <th>nom</th>
+      <th>duree_moyenne</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alexandre Sokourov</td>
+      <td>139</td>
+    </tr>
+    <tr>
+      <td>David Lynch</td>
+      <td>128.5</td>
+    </tr>
+    <tr>
+      <td>Hou Hsiao-Hsien</td>
+      <td>131</td>
+    </tr>
+    <tr>
+      <td>Jean Eustache</td>
+      <td>170</td>
+    </tr>
+    <tr>
+      <td>Michael Cimino</td>
+      <td>182</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copié");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copié");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

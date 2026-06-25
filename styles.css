@@ -1,0 +1,76 @@
+/* Style général de l'encadré */
+.theorem {
+  border: 1px solid #ccc;
+  border-left: 4px solid #007acc;
+  /* bleu un peu académique */
+  background-color: #f9f9f9;
+  padding: 12px 16px;
+  padding-bottom: 0px;
+  margin: 1em 0;
+  border-radius: 6px;
+}
+
+/* Style du titre du théorème */
+.theorem-title {
+  font-weight: bold;
+  color: #007acc;
+}
+
+.theorem.definition {
+  border-color: #006400;
+}
+
+.definition .theorem-title {
+  color: #006400;
+}
+
+.theorem.exercise {
+  border-color: #222222;
+}
+
+.exercise .theorem-title {
+  color: #222222;
+}
+
+/* Saut de ligne après le titre */
+.theorem-title::after {
+  content: "";
+  display: block;
+  margin-top: 0.1em;
+  margin-bottom: 0.3em;
+  border-bottom: 1px solid #ccc;
+}
+
+div[id^="algo-"] {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 1em 0;
+}
+
+div[id^="algo-"]::before {
+  content: attr(title);
+  display: block;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 0.1em;
+  margin-bottom: 0.3em;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-striped {
+  >tbody>tr:nth-of-type(odd)>* {
+    background-color: #f2f2f2;
+  }
+}
+
+pre.sourceCode {
+  background-color: #e2e8f0 !important;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.cell-output pre {
+  border-left: 1px solid #94a3b8;
+}
