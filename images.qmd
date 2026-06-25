@@ -73,12 +73,17 @@ plt.axis('off');
 
 ## Redimensionnement d'une image
 
-```{python}
-#| echo: false
-from bokeh.plotting import output_notebook
-output_notebook(hide_banner=True)
-%run _scripts/interpolation_bilineaire.py
+```{ojs}
+// | echo : false
+ibl = import("/scripts/interpolation_bilineaire.js")
+
+viewof container = {
+  const div = document.createElement('div');
+  ibl.mountInterpolation(div);
+  return div;
+}
 ```
+
 
 <!-- TODO A terminer -->
 

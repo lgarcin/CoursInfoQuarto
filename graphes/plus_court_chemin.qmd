@@ -143,7 +143,7 @@ Matrix(nx.to_numpy_array(G, dtype=float, nonedge=np.inf))
 
 ```{python}
 # | echo: false
-%run ../_scripts/dijkstra.py
+%run ../scripts/dijkstra.py
 ```
 
 L'objectif de l'algorithme de Dijkstra est de déterminer un **chemin de poids minimal** entre deux sommets d'un graphe pondéré, le poids d'un chemin étant égal à la somme des poids des arêtes qui le composent. Bien souvent, le poids d'une arête représente une distance entre deux sommets : on parle alors de **plus court chemin**.

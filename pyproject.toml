@@ -16,7 +16,16 @@ dependencies = [
     "scipy",
     "pillow",
     "panflute",
+    "jupysql>=0.11.1",
+    "seaborn>=0.13.2",
+    "imageio>=2.37.3",
+    "sympy>=1.14.0",
 ]
 
 [project.optional-dependencies]
 dev = ["ruff", "black", "mypy"]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+]

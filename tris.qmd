@@ -12,7 +12,7 @@ Un dessin vaut probablement mieux qu'un long discours.
 
 ```{python}
 #| echo: false
-%run _scripts/tri_insertion.py
+%run scripts/tri_insertion.py
 ```
 
 ```{python}
@@ -75,7 +75,7 @@ Le **tri rapide** est une application du principe _diviser pour régner_. Il con
 
 ```{python}
 #| echo: false
-%run _scripts/tri_rapide.py
+%run scripts/tri_rapide.py
 ```
 
 ```{python}
@@ -216,7 +216,7 @@ Le principe de fusion de deux listes triées en une liste triée est très simpl
 
 ```{python}
 #| echo: false
-%run _scripts/tri_fusion.py
+%run scripts/tri_fusion.py
 ```
 
 ```{python}

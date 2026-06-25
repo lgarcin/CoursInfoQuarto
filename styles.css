@@ -64,3 +64,13 @@ div[id^="algo-"]::before {
     background-color: #f2f2f2;
   }
 }
+
+pre.sourceCode {
+  background-color: #e2e8f0 !important;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.cell-output pre {
+  border-left: 1px solid #94a3b8;
+}

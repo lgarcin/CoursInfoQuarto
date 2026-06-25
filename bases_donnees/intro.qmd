@@ -1,17 +1,4 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-
-# Bases de données
+# Introduction aux bases de données
 
 Une base de données est un moyen d'organiser des données afin de retrouver efficacement de l'information. Supposons par exemple que je sois gérant d'un supermarché. Je peux par exemple souhaiter disposer des informations suivantes :
 

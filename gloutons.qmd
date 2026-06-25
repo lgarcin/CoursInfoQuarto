@@ -38,3 +38,63 @@ rendu_monnaie(16, [2, 15])
 ```
 
 On pourrait ici tout simplement rendre 8 pièces de 2€.
+
+## Allocation de salles
+
+On dispose d'un ensemble de salles et d'un ensemble de cours à programmer. Chaque cours a un horaire de début et un horaire de fin. On souhaite allouer les cours aux salles de manière à ce qu'aucun cours ne se chevauche dans une même salle.
+
+On va s'intéresser à deux problèmes : le premier consiste à allouer le maximum de cours dans une seule salle, le second consiste à allouer tous les cours dans un minimum de salles.
+
+### Allocation d'un maximum de cours dans une salle
+
+L'algorithme glouton consiste à toujours choisir le cours qui se termine le plus tôt parmi les cours disponibles. On peut ainsi maximiser le nombre de cours alloués dans une salle. Par exemple, supposons que l'on dispose des cours suivants déjà triés par heure de fin :
+
+- Mathématiques : 8h-10h
+- Physique : 9h-11h
+- Chimie : 11h-12h
+- Informatique : 11h-13h
+- Biologie : 12h-14h
+- Histoire : 12h-15h
+
+On examine les cours dans l'ordre :
+
+- on choisit le cours de Mathématiques (8h-10h)
+- on ne peut pas choisir le cours de Physique (9h-11h) car il chevauche le cours de Mathématiques
+- on choisit le cours de Chimie (11h-12h)
+- on ne peut pas choisir le cours d'Informatique (11h-13h) car il chevauche le cours de Chimie
+- on choisit le cours de Biologie (12h-14h)
+- on ne peut pas choisir le cours d'Histoire (12h-15h) car il chevauche le cours de Biologie
+
+Finalement, on a choisi les cours de Mathématiques, Chimie et Biologie. On a donc alloué 3 cours dans une salle.
+
+Cet algorithme est un algorithme glouton car il choisit toujours le cours qui se termine le plus tôt parmi les cours disponibles. On peut montrer qu'il est optimal dans le sens où il permet d'allouer le maximum de cours dans une salle.
+
+On peut implémenter cet algorithme en Python. Chaque cours est représenté par un tuple (matière, début, fin).
+
+```{python}
+def allocation_cours(cours):
+    cours_tries = sorted(cours, key=lambda x: x[2])  # Tri par heure de fin
+    allocation = []
+    dernier_cours_fin = 0
+
+    for cours in cours_tries:
+        if cours[1] >= dernier_cours_fin:  # Si le cours ne chevauche pas le dernier cours choisi
+            allocation.append(cours)
+            dernier_cours_fin = cours[2]
+
+    return allocation
+```
+
+Vérifions l'algorithme avec l'exemple précédent :
+
+```{python}
+cours = [
+    ("Mathématiques", 8, 10),
+    ("Physique", 9, 11),
+    ("Chimie", 11, 12),
+    ("Informatique", 11, 13),
+    ("Biologie", 12, 14),
+    ("Histoire", 12, 15)
+]
+allocation_cours(cours)
+```

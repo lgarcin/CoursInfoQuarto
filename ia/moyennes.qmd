@@ -1,16 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-
 # Algorithme des k-moyennes
 
 ## Description du problème
@@ -55,7 +42,7 @@ On représente les données par un tableau `numpy` `data` de taille $n\times d$ 
 
 La fonction suivante permet de mettre à jour la répartition des données dans chaque classe.
 
-```{code-cell}
+```{python}
 def update_classes(data, classes, nb_classes):
     barycentres = [
         np.mean(data[classes == id_classe], axis=0) for id_classe in range(nb_classes)
@@ -66,7 +53,7 @@ def update_classes(data, classes, nb_classes):
 
 On initialise les classes de manière aléatoire et on répète la mise à jour de la répartition jusqu'à ce qu'elle n'évolue plus.
 
-```{code-cell}
+```{python}
 def k_moyennes(data, nb_classes):
     N = data.shape[0]
     classes = rd.randint(nb_classes, size=N)
@@ -88,15 +75,15 @@ La fonction `update_classes` peut éventuellement générer des clusters vides. 
 
 On teste l'algorithme sur le jeu de données suivantes. Il s'agit de points de $\dR^2$.
 
-```{code-cell}
-:tags: ["remove-input"]
+```{python}
+#| echo: false
 import numpy as np
 import numpy.random as rd
 import numpy.linalg as alg
 ```
 
-```{code-cell}
-:tags: ["remove-input"]
+```{python}
+#| echo: false
 import matplotlib.pyplot as plt
 
 data1 = rd.normal([-5.0, 5.0], 1.0, (20, 2))
@@ -110,13 +97,13 @@ plt.scatter(data[:, 0], data[:, 1], alpha=0.7)
 plt.show()
 ```
 
-```{code-cell}
+```{python}
 nb_classes = 4
 classes = k_moyennes(data, nb_classes)
 ```
 
-```{code-cell}
-:tags: ["remove-input"]
+```{python}
+#| echo: false
 
 for id_classe in range(nb_classes):
     cluster = data[classes == id_classe]
@@ -124,13 +111,13 @@ for id_classe in range(nb_classes):
 plt.show()
 ```
 
-```{code-cell}
+```{python}
 nb_classes = 8
 classes = k_moyennes(data, nb_classes)
 ```
 
-```{code-cell}
-:tags: ["remove-input"]
+```{python}
+#| echo: false
 
 for id_classe in range(nb_classes):
     cluster = data[classes == id_classe]

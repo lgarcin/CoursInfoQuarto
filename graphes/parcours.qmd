@@ -10,7 +10,7 @@ logging.getLogger("matplotlib.animation").setLevel(logging.WARNING)
 
 ```{python}
 # | echo: false
-%run ../_scripts/graphe.py
+%run ../scripts/graphe.py
 ```
 
 ## Piles et files
@@ -23,7 +23,7 @@ Une pile est une structure de donnée dont les éléments sont insérés et reti
 
 ```{python}
 #| echo: false
-%run ../_scripts/stack.py
+%run ../scripts/stack.py
 ```
 
 ```{python}
@@ -77,7 +77,7 @@ Une file est une structure de donnée dont les éléments sont insérés par un 
 
 ```{python}
 #| echo: false
-%run ../_scripts/queue.py
+%run ../scripts/queue.py
 ```
 
 ```{python}
@@ -281,7 +281,7 @@ Il est plus facile de visualiser la différence entre parcours en profondeur et 
 
 ```{python}
 #| echo: false
-%run ../_scripts/parcours.py
+%run ../scripts/parcours.py
 ```
 
 ```{python}

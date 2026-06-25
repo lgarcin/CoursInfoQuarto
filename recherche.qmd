@@ -162,7 +162,7 @@ def recherche_motif(motif, chaine):
 
 ```{python}
 #| echo: false
-%run _scripts/recherche_motif.py
+%run scripts/recherche_motif.py
 ```
 
 ```{python}
@@ -237,7 +237,7 @@ Le tri à bulles consiste à déplacer les éléments du plus grand au plus peti
 
 ```{python}
 #| echo: false
-%run _scripts/tri_bulles.py
+%run scripts/tri_bulles.py
 ```
 
 ```{python}

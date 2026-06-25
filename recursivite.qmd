@@ -1,6 +1,42 @@
 # Récursivité
 
 <!-- TODO Expliquer le principe général -->
+Une fonction est dite **récursive** si elle fait appel à elle-même dans sa définition. La récursivité est un outil puissant pour définir des fonctions de manière élégante et concise. Cependant, il est important de veiller à ce que les fonctions récursives soient bien définies, c'est-à-dire qu'elles doivent comporter une condition d'arrêt pour éviter les appels infinis.
+
+Un exemple classique de fonction récursive est la fonction de calcul de la factorielle d'un nombre entier naturel $n$, notée $n!$. La factorielle de $n$ peut être définie par récurrence par la relation :
+
+$$n! = \begin{cases}
+1 & \text{si } n = 0 \\
+n \cdot (n-1)! & \text{si } n \geq 1
+\end{cases}
+$$
+
+On peut alors proposer la fonction suivante pour calculer la factorielle d'un nombre entier naturel.
+```{python}
+def factorielle(n):
+    if n == 0:      # Condition d'arrêt
+        return 1
+    else:
+        return n * factorielle(n - 1)
+```
+
+```{python}
+factorielle(5)
+```
+
+Attention, si on oublie la condition d'arrêt, la fonction suivante est également récursive mais elle n'est pas bien définie.
+
+```{python}
+def factorielle(n):
+    return n * factorielle(n - 1)
+```
+
+On peut alors constater que l'appel de cette fonction avec un entier naturel quelconque entraîne une erreur en raison d'appels récursifs infinis.
+
+```{python}
+#| error: true
+factorielle(5)
+```
 
 <!-- TODO Expliquer le principe de la pile de récursion -->
 

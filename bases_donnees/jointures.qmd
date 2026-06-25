@@ -1,16 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-
 # Jointures
 
 Les **jointures** permettent de retrouver de l'information sur deux ou plusieurs tables associées par des clés primaires/étrangères. On utilise pour cela une clause `JOIN` assortie d'une condition.
@@ -27,19 +14,19 @@ SELECT _colonnes_ FROM _table1_, _table2_ WHERE _condition_
 
 Néanmoins, une jointure est plus rapide qu'une sélection sur un produit cartésien.
 
-```{.sql db_name=../_databases/dummy.db}
+```{.sql db_name=../databases/dummy.db}
 SELECT * FROM films JOIN realisateurs ON films.realisateur_id = realisateurs.id
 ```
 
 On vérifie qu'une sélection sur un produit cartésien produit le même résultat.
 
-```{.sql db_name=../_databases/dummy.db}
+```{.sql db_name=../databases/dummy.db}
 SELECT * FROM films, realisateurs WHERE films.realisateur_id = realisateurs.id
 ```
 
 On peut également effectuer la jointure de plus de deux tables.
 
-```{.sql db_name=../_databases/dummy.db}
+```{.sql db_name=../databases/dummy.db}
 SELECT titre, nom, note FROM films JOIN notes JOIN spectateurs
 ON films.id = notes.film_id AND spectateurs.id = notes.spectateur_id
 ```
@@ -48,7 +35,7 @@ On peut enfin effectuer la jointure d'une table avec elle-même. On parle alors 
 
 Considérons par exemple la table suivante.
 
-```{.sql db_name=../_databases/dummy.db}
+```{.sql db_name=../databases/dummy.db}
 SELECT * FROM employes
 ```
 
@@ -60,7 +47,7 @@ La valeur `None` indique l'absence de données.
 
 On peut alors récupérer la table des employés affectés de leurs responsables de la manière suivante.
 
-```{.sql db_name=../_databases/dummy.db}
+```{.sql db_name=../databases/dummy.db}
 SELECT e.nom AS nom_employe, r.nom AS nom_responsable
 FROM employes AS e
 JOIN employes AS r

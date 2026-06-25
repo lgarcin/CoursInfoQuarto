@@ -1,7 +1,7 @@
 # This file is used internally by FFMPEG.
-file 'file:E:/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/1185818338_2355880207_223132457.mp4'
-file 'file:E:/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/624642324_1839128356_1723582614.mp4'
-file 'file:E:/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/624642324_3429988797_752679977.mp4'
-file 'file:E:/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/624642324_1035902928_4126671611.mp4'
-file 'file:E:/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/624642324_361877128_2071817897.mp4'
-file 'file:E:/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/624642324_1754310298_1575778307.mp4'
+file 'file:/mnt/data/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/1584795214_646064575_223132457.mp4'
+file 'file:/mnt/data/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/4072820271_4217992463_3161802877.mp4'
+file 'file:/mnt/data/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/4072820271_597204708_501403497.mp4'
+file 'file:/mnt/data/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/4072820271_295115363_1601050320.mp4'
+file 'file:/mnt/data/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/4072820271_1819609806_2274026742.mp4'
+file 'file:/mnt/data/Documents/GitHub/CoursInfoQuarto/graphes/media/videos/480p15/partial_movie_files/DoubleParcours/4072820271_2834709167_4073006957.mp4'

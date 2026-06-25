@@ -38,6 +38,12 @@ website:
               - bases_donnees/entite_association.qmd
               - bases_donnees/jointures.qmd
               - bases_donnees/agregation.qmd
+          - section: "Intelligence artificielle et étude des jeux"
+            contents:
+              - ia/intro.qmd
+              - ia/voisins.qmd
+              - ia/moyennes.qmd
+              - ia/jeux.qmd
 
 lang: fr
 
@@ -56,3 +62,6 @@ execute:
 
 filters: 
   - filters/sql_filter.py
+
+resources:
+  - scripts/**/*.js

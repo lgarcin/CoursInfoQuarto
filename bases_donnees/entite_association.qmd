@@ -1,23 +1,10 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-
 # Modèle entité-association
 
 ```{python}
 # | echo: false
 # | output: false
 %load_ext sql
-%sql sqlite:///../_databases/dummy.db
+%sql sqlite:///../databases/dummy.db
 %config SqlMagic.displaylimit = 0
 %config SqlMagic.displaycon = False
 %config SqlMagic.feedback = 0
