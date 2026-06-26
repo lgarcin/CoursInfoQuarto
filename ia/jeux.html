@@ -82,6 +82,35 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -352,7 +381,9 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="etude-des-jeux" class="level1">
 <h1>Etude des jeux</h1>
-<p><code>jkjkatcmklpnnngc Graphe *biparti* :label: def_graphe_biparti Un graphe est dit **biparti** s'il est possible de partitionner ses sommets en deux sous-ensembles disjoints $A$ et $B$ tels que chaque arête du graphe relie un sommet de $A$ à un sommet de $B$.</code></p>
+<div id="def-graphe-biparti" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 1 (Graphe biparti)</strong></span> Un graphe est dit <strong>biparti</strong> s’il est possible de partitionner ses sommets en deux sous-ensembles disjoints <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> tels que chaque arête du graphe relie un sommet de <span class="math inline">\(A\)</span> à un sommet de <span class="math inline">\(B\)</span>.</p>
+</div>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -450,7 +481,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/lgarcin\.github\.io\/CoursInfoQuarto\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

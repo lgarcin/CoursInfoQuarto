@@ -375,6 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#allocation-de-salles" id="toc-allocation-de-salles" class="nav-link" data-scroll-target="#allocation-de-salles">Allocation de salles</a>
   <ul class="collapse">
   <li><a href="#allocation-dun-maximum-de-cours-dans-une-salle" id="toc-allocation-dun-maximum-de-cours-dans-une-salle" class="nav-link" data-scroll-target="#allocation-dun-maximum-de-cours-dans-une-salle">Allocation d’un maximum de cours dans une salle</a></li>
+  <li><a href="#allocation-de-tous-les-cours-dans-un-minimum-de-salles" id="toc-allocation-de-tous-les-cours-dans-un-minimum-de-salles" class="nav-link" data-scroll-target="#allocation-de-tous-les-cours-dans-un-minimum-de-salles">Allocation de tous les cours dans un minimum de salles</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -411,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="exm-rendu-pieces-2" class="theorem example">
 <p><span class="theorem-title"><strong>Exemple 2</strong></span> On reprend l’exemple précédent. On dipose de pièces de monnaie de 1€, 2€ et 5€ et on souhaite à totaliser la somme de 23€. On donne alors des pièces de 5€ tant que la somme restant à rendre est inférieure à 5€. On donne donc 4 pièces de 5€. La somme restante est alors de 3€. On donne donc 1 pièce de 2€. La somme restante est de 1€ et on termine donc en donnant 1 pièce de 1€.</p>
 </div>
-<div id="8d98873c" class="cell" data-execution_count="1">
+<div id="0540d458" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rendu_monnaie(somme, pieces):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    pieces_triees <span class="op">=</span> <span class="bu">sorted</span>(pieces, reverse<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> {}</span>
@@ -421,17 +422,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        d[piece] <span class="op">=</span> q</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d, r</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a822c654" class="cell" data-execution_count="2">
+<div id="c075f548" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rendu_monnaie(<span class="dv">23</span>, [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>])</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>({5: 4, 2: 1, 1: 1}, 0)</code></pre>
 </div>
 </div>
 <p>Il n’est pas toujours possible de rendre la somme suivant le système de monnaie employée. Par exemple, avec des pièces de 3€, 9€ et 12€, on ne pourra atteindre que des sommes qui sont des multiples de 3€.</p>
 <p>L’algorithme glouton peut également ne pas trouver de solution alors qu’il en existe une.</p>
-<div id="4dca2579" class="cell" data-execution_count="3">
+<div id="17e84065" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rendu_monnaie(<span class="dv">16</span>, [<span class="dv">2</span>, <span class="dv">15</span>])</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>({15: 1, 2: 0}, 1)</code></pre>
 </div>
 </div>
@@ -443,7 +444,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>On va s’intéresser à deux problèmes : le premier consiste à allouer le maximum de cours dans une seule salle, le second consiste à allouer tous les cours dans un minimum de salles.</p>
 <section id="allocation-dun-maximum-de-cours-dans-une-salle" class="level3">
 <h3 class="anchored" data-anchor-id="allocation-dun-maximum-de-cours-dans-une-salle">Allocation d’un maximum de cours dans une salle</h3>
-<p>L’algorithme glouton consiste à toujours choisir le cours qui se termine le plus tôt parmi les cours disponibles. On peut ainsi maximiser le nombre de cours alloués dans une salle. Par exemple, supposons que l’on dispose des cours suivants déjà triés par heure de fin :</p>
+<p>L’algorithme glouton consiste à toujours choisir le cours qui se termine le plus tôt parmi les cours disponibles. On peut ainsi maximiser le nombre de cours alloués dans une salle.</p>
+<div id="exm-allocation-cours-1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 3</strong></span> Supposons que l’on dispose des cours suivants déjà triés par heure de fin :</p>
 <ul>
 <li>Mathématiques : 8h-10h</li>
 <li>Physique : 9h-11h</li>
@@ -462,9 +465,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>on ne peut pas choisir le cours d’Histoire (12h-15h) car il chevauche le cours de Biologie</li>
 </ul>
 <p>Finalement, on a choisi les cours de Mathématiques, Chimie et Biologie. On a donc alloué 3 cours dans une salle.</p>
+</div>
 <p>Cet algorithme est un algorithme glouton car il choisit toujours le cours qui se termine le plus tôt parmi les cours disponibles. On peut montrer qu’il est optimal dans le sens où il permet d’allouer le maximum de cours dans une salle.</p>
 <p>On peut implémenter cet algorithme en Python. Chaque cours est représenté par un tuple (matière, début, fin).</p>
-<div id="7adb5510" class="cell" data-execution_count="4">
+<div id="4c3d97c0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> allocation_cours(cours):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    cours_tries <span class="op">=</span> <span class="bu">sorted</span>(cours, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">2</span>])  <span class="co"># Tri par heure de fin</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    allocation <span class="op">=</span> []</span>
@@ -478,7 +482,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> allocation</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Vérifions l’algorithme avec l’exemple précédent :</p>
-<div id="d33262ec" class="cell" data-execution_count="5">
+<div id="0f205447" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cours <span class="op">=</span> [</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Mathématiques"</span>, <span class="dv">8</span>, <span class="dv">10</span>),</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Physique"</span>, <span class="dv">9</span>, <span class="dv">11</span>),</span>
@@ -488,8 +492,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Histoire"</span>, <span class="dv">12</span>, <span class="dv">15</span>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>allocation_cours(cours)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>[('Mathématiques', 8, 10), ('Chimie', 11, 12), ('Biologie', 12, 14)]</code></pre>
+</div>
+</div>
+</section>
+<section id="allocation-de-tous-les-cours-dans-un-minimum-de-salles" class="level3">
+<h3 class="anchored" data-anchor-id="allocation-de-tous-les-cours-dans-un-minimum-de-salles">Allocation de tous les cours dans un minimum de salles</h3>
+<p>L’algorithme glouton consiste à parcourir les cours triés par heure de début et à les placer dans la salle dont le dernier cours se termine le plus tôt. Si aucune salle n’est libre, on ouvre une nouvelle salle.</p>
+<div id="exm-allocation-cours-2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemple 4</strong></span> Supposons que l’on dispose des cours suivants déjà triés par heure de début :</p>
+<ul>
+<li>Mathématiques : 8h-10h</li>
+<li>Physique : 9h-11h</li>
+<li>Chimie : 11h-12h</li>
+<li>Informatique : 11h-13h</li>
+<li>Biologie : 12h-14h</li>
+<li>Histoire : 12h-15h</li>
+</ul>
+<p>On examine les cours dans l’ordre :</p>
+<ul>
+<li>on place le cours de Mathématiques (8h-10h) dans la salle 1</li>
+<li>on place le cours de Physique (9h-11h) dans la salle 2 (car il chevauche le cours de Mathématiques)</li>
+<li>on place le cours de Chimie (11h-12h) dans la salle 1 (car il ne chevauche pas le cours de Mathématiques)</li>
+<li>on place le cours d’Informatique (11h-13h) dans la salle 2 (car il ne chevauche pas le cours de Physique)</li>
+<li>on place le cours de Biologie (12h-14h) dans la salle 1 (car il ne chevauche pas le cours de Chimie)</li>
+<li>on place le cours d’Histoire (12h-15h) dans la salle 3 (car il chevauche les cours de Biologie et d’Informatique)</li>
+</ul>
+<p>Finalement, on a utilisé 3 salles pour allouer tous les cours. La première salle contient les cours de Mathématiques, Chimie et Biologie, la deuxième salle contient les cours de Physique, Informatique et la troisième salle contient le cours d’Histoire.</p>
+</div>
+<p>Cet algorithme est un algorithme glouton car il choisit toujours la salle dont le dernier cours se termine le plus tôt parmi les salles disponibles. On peut montrer qu’il est optimal dans le sens où il permet d’allouer tous les cours dans un minimum de salles.</p>
+<p>On peut implémenter cet algorithme en Python. Chaque cours est représenté par un tuple (matière, début, fin).</p>
+<div id="63a60d5c" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> allocation_salles(cours):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    cours_tries <span class="op">=</span> <span class="bu">sorted</span>(cours, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])  <span class="co"># Tri par heure de début</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    salles <span class="op">=</span> []  <span class="co"># Liste des salles, chaque salle est une liste de cours</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cours <span class="kw">in</span> cours_tries:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        placed <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> salle <span class="kw">in</span> salles:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> salle[<span class="op">-</span><span class="dv">1</span>][<span class="dv">2</span>] <span class="op">&lt;=</span> cours[<span class="dv">1</span>]:  <span class="co"># Si le dernier cours de la salle ne chevauche pas le cours actuel</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                salle.append(cours)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                placed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> placed:</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>            salles.append([cours])  <span class="co"># Ouvrir une nouvelle salle</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> salles</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vérifions l’algorithme avec l’exemple précédent :</p>
+<div id="eb9f6613" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>allocation_salles(cours)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>[[('Mathématiques', 8, 10), ('Chimie', 11, 12), ('Biologie', 12, 14)],
+ [('Physique', 9, 11), ('Informatique', 11, 13)],
+ [('Histoire', 12, 15)]]</code></pre>
 </div>
 </div>
 
@@ -571,7 +628,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/lgarcin\.github\.io\/CoursInfoQuarto\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
