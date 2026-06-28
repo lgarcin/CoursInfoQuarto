@@ -464,7 +464,7 @@ window.Quarto = {
 <section id="implémentation" class="level2">
 <h2 class="anchored" data-anchor-id="implémentation">Implémentation</h2>
 <p>La fonction suivante permet de mettre à jour la répartition des données dans chaque classe.</p>
-<div id="800a7434" class="cell" data-execution_count="1">
+<div id="231e78b6" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update_classes(data, classes, nb_classes):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    barycentres <span class="op">=</span> [</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        np.mean(data[classes <span class="op">==</span> id_classe], axis<span class="op">=</span><span class="dv">0</span>) <span class="cf">for</span> id_classe <span class="kw">in</span> <span class="bu">range</span>(nb_classes)</span>
@@ -473,7 +473,7 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.argmin(distances, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>On initialise les classes de manière aléatoire et on répète la mise à jour de la répartition jusqu’à ce qu’elle n’évolue plus.</p>
-<div id="d0ee12ca" class="cell" data-execution_count="2">
+<div id="60e87cbf" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> k_moyennes(data, nb_classes):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> data.shape[<span class="dv">0</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    classes <span class="op">=</span> rd.randint(nb_classes, size<span class="op">=</span>N)</span>
@@ -488,9 +488,21 @@ window.Quarto = {
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        classes <span class="op">=</span> c</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> classes</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<pre class="{warning}"><code>La fonction `update_classes` peut éventuellement générer des clusters vides. Le calcul du barycentre d'une telle classe déclencherait alors une erreur. On choisit dans ce cas de redémarrer l'algorithme avec une classe de moins.</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Avertissement
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La fonction <code>update_classes</code> peut éventuellement générer des clusters vides. Le calcul du barycentre d’une telle classe déclencherait alors une erreur. On choisit dans ce cas de redémarrer l’algorithme avec une classe de moins.</p>
+</div>
+</div>
 <p>On teste l’algorithme sur le jeu de données suivantes. Il s’agit de points de <span class="math inline">\(\dR^2\)</span>.</p>
-<div id="9a342fa6" class="cell" data-execution_count="4">
+<div id="53dae9d7" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -499,14 +511,14 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="5d1964bf" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nb_classes <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> k_moyennes(data, nb_classes)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="5b1bd30d" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nb_classes <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> k_moyennes(data, nb_classes)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cluster vide, passage à 3 classes</code></pre>
 </div>
 </div>
-<div id="4b408f55" class="cell" data-execution_count="6">
+<div id="323c6b0f" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -515,16 +527,18 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="963128f1" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nb_classes <span class="op">=</span> <span class="dv">8</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> k_moyennes(data, nb_classes)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="f4c2c02f" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nb_classes <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> k_moyennes(data, nb_classes)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cluster vide, passage à 7 classes
 Cluster vide, passage à 6 classes
-Cluster vide, passage à 5 classes</code></pre>
+Cluster vide, passage à 5 classes
+Cluster vide, passage à 4 classes
+Cluster vide, passage à 3 classes</code></pre>
 </div>
 </div>
-<div id="18f03eab" class="cell" data-execution_count="8">
+<div id="052cea8f" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
